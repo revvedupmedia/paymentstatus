@@ -349,6 +349,10 @@
       <span class="detail-value" id="payer_email">--</span>
     </div>
     <div class="detail-row">
+      <span class="detail-label">Phone</span>
+      <span class="detail-value" id="payer_phone">--</span>
+    </div>
+    <div class="detail-row">
       <span class="detail-label">Amount Paid</span>
       <span class="detail-value amount" id="amount">RM --</span>
     </div>
@@ -428,25 +432,29 @@
       }
     }
 
-    // === Resolve customer & transaction details (with name aliases) ===
-    const orderNo = readAny(['order_number', 'order_no', 'order_id', 'orderNumber', 'order']);
-    const name    = readAny(['payer_name', 'buyer_name', 'customer_name', 'name', 'full_name', 'fullname']);
-    const email   = readAny(['payer_email', 'buyer_email', 'customer_email', 'email']);
-    const phone   = readAny(['payer_telephone_number', 'payer_phone', 'phone', 'telephone', 'mobile']);
+    // === Resolve customer & transaction details ===
+    // Primary names = BCL.my official variables (from "Show Available Variables")
+    // Fallbacks = common aliases in case URL was set differently
+    const orderNo = readAny(['order_number', 'order_no', 'order_id', 'order']);
+    const name    = readAny(['customer_name', 'payer_name', 'buyer_name', 'name', 'full_name']);
+    const email   = readAny(['email', 'customer_email', 'payer_email', 'buyer_email']);
+    const phone   = readAny(['customer_phone', 'phone', 'payer_phone', 'payer_telephone_number', 'mobile', 'telephone']);
     const amountRaw = readAny(['amount', 'paid_amount', 'total']);
     const amountFmt = amountRaw ? 'RM ' + parseFloat(amountRaw).toFixed(2) : '';
     const statusVal = readAny(['status', 'payment_status', 'transaction_status']);
-    const txnId   = readAny(['transaction_id', 'txn_id', 'reference', 'reference_number', 'ref']);
+    const txnId   = readAny(['reference_id', 'transaction_id', 'txn_id', 'reference', 'reference_number', 'ref']);
     const payDate = readAny(['payment_date', 'paid_at', 'date']) ||
       new Date().toLocaleDateString('en-MY', { day: '2-digit', month: 'short', year: 'numeric' });
+    const payMethod = readAny(['payment_method', 'method']);
 
     // Populate receipt fields
-    setTextById('order_number', orderNo, '--');
-    setTextById('payer_name',  name,    '--');
-    setTextById('payer_email', email,   '--');
-    setTextById('amount',      amountFmt, 'RM --');
-    setTextById('status',      statusVal ? statusVal.toUpperCase() : 'PAID');
-    setTextById('transaction_id', txnId, '--');
+    setTextById('order_number',   orderNo, '--');
+    setTextById('payer_name',     name,    '--');
+    setTextById('payer_email',    email,   '--');
+    setTextById('payer_phone',    phone,   '--');
+    setTextById('amount',         amountFmt, 'RM --');
+    setTextById('status',         statusVal ? statusVal.toUpperCase() : 'PAID');
+    setTextById('transaction_id', txnId,   '--');
     setTextById('payment_date',   payDate);
 
     // === Build pre-filled WhatsApp message to admin ===

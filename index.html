@@ -126,7 +126,7 @@
   <p class="subtitle">// PREVIEW ALL 3 RECEIPT PAGES //</p>
 
   <div class="grid">
-    <a href="success.html?order_number=ORD-12345&payer_name=Ahmad%20Bin%20Ali&payer_email=ahmad%40example.com&amount=197.00&transaction_id=TXN-987654&payment_date=26%20May%202026" class="card card-success">
+    <a href="success.html?order_number=ORD-12345&customer_name=Ahmad%20Bin%20Ali&email=ahmad%40example.com&customer_phone=0123456789&amount=197.00&reference_id=REF-987654&payment_date=26%20May%202026&status=success&payment_method=FPX" class="card card-success">
       <span class="card-icon">✓</span>
       <h2 class="card-title">SUCCESS PAGE</h2>
       <p class="card-desc">Untuk redirect bila pembayaran berjaya. Display order details + access granted.</p>
@@ -151,9 +151,9 @@
   <div class="info-box">
     <div class="info-title">[ BCL.MY REDIRECT URLS ]</div>
     <p style="color:#ccc;margin-bottom:12px;">Letak URL ni dalam Forms Payment → Redirect Receipt Page:</p>
-    <code>https://revvedupmedia.github.io/paymentstatus/success.html?order_number={order_number}&amount={amount}&transaction_id={transaction_id}</code>
-    <code>https://revvedupmedia.github.io/paymentstatus/failed.html?order_number={order_number}&amount={amount}&reason={status}</code>
-    <code>https://revvedupmedia.github.io/paymentstatus/pending.html?order_number={order_number}&amount={amount}</code>
+    <code>https://revvedupmedia.github.io/paymentstatus/success.html?order_number={order_number}&customer_name={customer_name}&email={email}&customer_phone={customer_phone}&amount={amount}&reference_id={reference_id}&payment_date={payment_date}&status={status}&payment_method={payment_method}</code>
+    <code>https://revvedupmedia.github.io/paymentstatus/failed.html?order_number={order_number}&customer_name={customer_name}&email={email}&customer_phone={customer_phone}&amount={amount}&reference_id={reference_id}&reason={status}</code>
+    <code>https://revvedupmedia.github.io/paymentstatus/pending.html?order_number={order_number}&customer_name={customer_name}&email={email}&amount={amount}&payment_method={payment_method}</code>
   </div>
 </div>
 </body>
